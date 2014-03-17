@@ -294,6 +294,13 @@ type Tx struct {
 	driverName string
 }
 
+// added by lcvinny
+// NewTx returns a new sqlx Tx wrapper for a pre-existing *sql.Tx.  The
+// driverName of the original database is required for named query support.
+func NewTx(tx *sql.Tx, driverName string) *Tx {
+	return &Tx{*tx, driverName}
+}
+
 // DriverName returns the driverName used by the DB which began this transaction.
 func (tx *Tx) DriverName() string {
 	return tx.driverName
